@@ -6,6 +6,6 @@ const ctrl = require("../../controllers/shops");
 
 router.get("/", ctrl.getAllShops);
 
-router.get("/:id", ctrl.ShopById);
+router.get("/:id", ctrl.getShopById);
 
 module.exports = router;

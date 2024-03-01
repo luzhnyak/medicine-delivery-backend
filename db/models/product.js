@@ -2,6 +2,8 @@ const { DataTypes } = require("sequelize");
 
 const sequelize = require("../config");
 
+const ShopStorage = require("./shopStorage");
+
 const Product = sequelize.define(
   "products",
   {
@@ -22,7 +24,12 @@ const Product = sequelize.define(
   },
   {
     // Other model options go here
+    timestamps: false, // відключення автоматичної генерації createdAt та updatedAt
   }
 );
+
+// Встановлення зв'язку один до багатьох
+ShopStorage.belongsTo(Product, { foreignKey: "product_id", as: "product" });
+Product.hasMany(ShopStorage, { foreignKey: "product_id", as: "shopStorages" });
 
 module.exports = Product;

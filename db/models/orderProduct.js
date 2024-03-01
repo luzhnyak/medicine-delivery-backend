@@ -25,6 +25,7 @@ const OrderProduct = sequelize.define(
   },
   {
     // Other model options go here
+    timestamps: false, // відключення автоматичної генерації createdAt та updatedAt
   }
 );
 

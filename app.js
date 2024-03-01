@@ -4,8 +4,7 @@ const cors = require("cors");
 const dotenv = require("dotenv");
 
 const productsRouter = require("./routes/api/products");
-const categoriesRouter = require("./routes/api/categories");
-const brandsRouter = require("./routes/api/brands");
+const shopsRouter = require("./routes/api/shops");
 const orderRouter = require("./routes/api/orders");
 
 dotenv.config();
@@ -22,8 +21,7 @@ app.use(cors());
 app.use(express.json());
 
 app.use("/api/products", productsRouter);
-app.use("/api/categories", categoriesRouter);
-app.use("/api/brands", brandsRouter);
+app.use("/api/shops", shopsRouter);
 app.use("/api/orders", orderRouter);
 
 app.use((req, res) => {
