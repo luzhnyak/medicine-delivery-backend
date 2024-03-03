@@ -1,6 +1,7 @@
 const { DataTypes } = require("sequelize");
 
 const sequelize = require("../config");
+const OrderProduct = require("./orderProduct");
 
 const Order = sequelize.define(
   "order",
@@ -10,20 +11,17 @@ const Order = sequelize.define(
       primaryKey: true,
       autoIncrement: true,
     },
-    address: {
-      type: DataTypes.STRING,
-    },
-    phone: {
+    name: {
       type: DataTypes.STRING,
     },
     email: {
       type: DataTypes.STRING,
     },
-    comment: {
+    phone: {
       type: DataTypes.STRING,
     },
-    suma: {
-      type: DataTypes.FLOAT,
+    address: {
+      type: DataTypes.STRING,
     },
   },
   {
@@ -31,5 +29,12 @@ const Order = sequelize.define(
     timestamps: false, // відключення автоматичної генерації createdAt та updatedAt
   }
 );
+
+// Встановлення зв'язку "один до багатьох" між Order і OrderProduct
+Order.hasMany(OrderProduct, { foreignKey: "order_id", as: "orderProducts" });
+OrderProduct.belongsTo(Order, {
+  foreignKey: "order_id", // поле, яке буде використане в таблиці OrderProduct
+  targetKey: "id", // поле, за яким буде встановлюватися зв'язок в таблиці Order
+});
 
 module.exports = Order;

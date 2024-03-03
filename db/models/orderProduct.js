@@ -10,6 +10,9 @@ const OrderProduct = sequelize.define(
       primaryKey: true,
       autoIncrement: true,
     },
+    shop_id: {
+      type: DataTypes.INTEGER,
+    },
     order_id: {
       type: DataTypes.INTEGER,
     },
