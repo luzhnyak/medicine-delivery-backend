@@ -25,16 +25,14 @@ const Order = sequelize.define(
     },
   },
   {
-    // Other model options go here
-    timestamps: false, // відключення автоматичної генерації createdAt та updatedAt
+    timestamps: false,
   }
 );
 
-// Встановлення зв'язку "один до багатьох" між Order і OrderProduct
 Order.hasMany(OrderProduct, { foreignKey: "order_id", as: "orderProducts" });
 OrderProduct.belongsTo(Order, {
-  foreignKey: "order_id", // поле, яке буде використане в таблиці OrderProduct
-  targetKey: "id", // поле, за яким буде встановлюватися зв'язок в таблиці Order
+  foreignKey: "order_id",
+  targetKey: "id",
 });
 
 module.exports = Order;
