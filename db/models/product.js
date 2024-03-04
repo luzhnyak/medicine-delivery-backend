@@ -23,12 +23,10 @@ const Product = sequelize.define(
     },
   },
   {
-    // Other model options go here
-    timestamps: false, // відключення автоматичної генерації createdAt та updatedAt
+    timestamps: false,
   }
 );
 
-// Встановлення зв'язку один до багатьох
 ShopStorage.belongsTo(Product, { foreignKey: "product_id", as: "product" });
 Product.hasMany(ShopStorage, { foreignKey: "product_id", as: "shopStorages" });
 

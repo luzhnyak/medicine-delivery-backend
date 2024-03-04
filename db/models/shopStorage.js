@@ -2,8 +2,6 @@ const { DataTypes } = require("sequelize");
 
 const sequelize = require("../config");
 
-const Product = require("./product");
-
 const ShopStorage = sequelize.define(
   "shop_storage",
   {
@@ -26,12 +24,8 @@ const ShopStorage = sequelize.define(
     },
   },
   {
-    // Other model options go here
-    timestamps: false, // відключення автоматичної генерації createdAt та updatedAt
+    timestamps: true,
   }
 );
-
-// ShopStorage.belongsTo(Product, { foreignKey: "product_id", as: "product" });
-// Product.hasMany(ShopStorage, { foreignKey: "product_id", as: "shopStorages" });
 
 module.exports = ShopStorage;

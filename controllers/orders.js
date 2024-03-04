@@ -1,10 +1,8 @@
 const { HttpError, ctrlWrapper } = require("../helpers");
-const sequelize = require("../db/config");
 
 const Product = require("../db/models/product");
 const Order = require("../db/models/order");
 const OrderProduct = require("../db/models/orderProduct");
-const { refreshSumOrder } = require("../db/services/orders");
 
 // ============================== Get All
 
@@ -12,10 +10,6 @@ const getAllOrders = async (req, res) => {
   const { email } = req.query;
   const orders = await Order.findAll({
     where: { email },
-    // include: {
-    //   model: OrderProduct,
-    //   as: "orderProducts", // використовуйте те саме ім'я, яке ви вказали у зв'язку
-    // },
   });
 
   if (!orders) {

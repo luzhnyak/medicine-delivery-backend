@@ -25,7 +25,7 @@ const Order = sequelize.define(
     },
   },
   {
-    timestamps: false,
+    timestamps: true,
   }
 );
 
