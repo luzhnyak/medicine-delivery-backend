@@ -25,11 +25,13 @@ Medicine Delivery is an online platform for purchasing medicines from various ph
 - **Redux Toolkit**: State management library for managing the application's state.
 - **React Toastify**: For displaying toast notifications.
 - **Axios**: Promise-based HTTP client for making requests to the backend.
+- **Bootstrap**: CSS framework directed at responsive, mobile-first front-end web development.
 
 ### Backend
 
 - **Node.js**: Backend runtime environment for executing JavaScript code.
 - **Express.js**: Web application framework for building APIs.
+- **MariaDB**: Relational system of databases.
 - **Sequelize**: ORM for Node.js based on a deferred computation strategy (promise).
 - **Cors**: Middleware for enabling Cross-Origin Resource Sharing.
 - **dotenv**: For loading environment variables from a .env file.
