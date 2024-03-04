@@ -9,18 +9,44 @@ const { refreshSumOrder } = require("../db/services/orders");
 // ============================== Get All
 
 const getAllOrders = async (req, res) => {
-  const order = await Order.findAll({
-    include: {
-      model: OrderProduct,
-      as: "orderProducts", // використовуйте те саме ім'я, яке ви вказали у зв'язку
-    },
+  const { email } = req.query;
+  const orders = await Order.findAll({
+    where: { email },
+    // include: {
+    //   model: OrderProduct,
+    //   as: "orderProducts", // використовуйте те саме ім'я, яке ви вказали у зв'язку
+    // },
   });
 
-  if (!order) {
+  if (!orders) {
     throw HttpError(404, "Not found");
   }
 
-  res.json(order);
+  const data = await Promise.all(
+    orders.map(async (order) => {
+      const orderProducts = await OrderProduct.findAll({
+        where: { order_id: order.id },
+      });
+
+      const fullOrderProducts = await Promise.all(
+        orderProducts.map(async (orderProduct) => {
+          const product = await Product.findByPk(orderProduct.product_id);
+
+          return {
+            ...orderProduct.toJSON(),
+            name: product && product.name,
+          };
+        })
+      );
+
+      return {
+        ...order.toJSON(),
+        orderProducts: fullOrderProducts,
+      };
+    })
+  );
+
+  res.json(data);
 };
 
 // ============================== Get by ID
@@ -31,7 +57,7 @@ const getOrderById = async (req, res) => {
   const order = await Order.findByPk(id, {
     include: {
       model: OrderProduct,
-      as: "orderProducts", // використовуйте те саме ім'я, яке ви вказали у зв'язку
+      as: "orderProducts",
     },
   });
 
